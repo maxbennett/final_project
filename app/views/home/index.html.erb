@@ -1,0 +1,140 @@
+<h2>Daily Routines</h2>
+<table>
+	<thead>
+		<tr>
+			<th></th>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Frequency</th>
+			<th></th>
+		</tr>
+	</thead>
+<% @daily_routines.each do |routine| %>
+	<tr>
+		<td>
+		<% if RoutineTodo.where(:routine_id => routine.id).order(:due_date)[0].completed == true %>
+			<%= button_to "complete", {controller: "routine_todos",
+      action: "update", routine_id: routine.id, completed: "false" }, method: "put" %>
+		<% else %>
+			<%= button_to "not complete", {controller: "routine_todos",
+      action: "update", routine_id: routine.id, completed: "true" }, method: "put" %>
+		<% end %>
+
+		</td>
+
+
+		<td><%= routine.title %></td>
+		<td><%= routine.description %></td>
+		<td><%= routine.frequency %></td>
+		<td><%= button_to "delete", {:controller => :routines,
+      :action => 'destroy', :id => routine.id }, :method => :delete %></td>
+	</tr>
+
+	<% RoutineTodo.where(routine_id: routine.id).each do |todo| %>
+	<tr>
+		<td>
+			  <%= form_tag("/routine_todo", method: "put") do %>
+			  <%= label_tag(:text_requirement, "Text Requirement") %> 
+			  <%= text_field_tag(:text_requirement) %>
+			  <%= hidden_field_tag(:routine_id, routine.id) %>
+			  <%= submit_tag("save") %>
+			  <% end %>
+  		</td>
+  		<td><%= todo.text_requirement%></td>
+		<td><%= todo.due_date %></td>
+		<td><%= todo.completed %></td>
+	</tr>
+	
+	<% end %>
+<% end %>
+
+</table>
+
+
+</br></br></br></br>
+<h2>Weekly Routines</h2>
+<table>
+	<thead>
+		<tr>
+			<th></th>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Frequency</th>
+		</tr>
+	</thead>
+<% @weekly_routines.each do |task| %>
+	<tr>
+		<td>
+		<% if RoutineTodo.where(:routine_id => task.id).order(:due_date)[0].completed == true %>
+			<%= button_to "complete", {controller: "routine_todos",
+      action: "update", routine_id: task.id, completed: "false" }, method: "put" %>
+		<% else %>
+			<%= button_to "not complete", {controller: "routine_todos",
+      action: "update", routine_id: task.id, completed: "true" }, method: "put" %>
+		<% end %>
+		</td>
+		<td><%= task.title %></td>
+		<td><%= task.description %></td>
+		<td><%= task.frequency %></td>
+		<td><%= button_to "delete", {:controller => :routines,
+      :action => 'destroy', :id => task.id }, :method => :delete %></td>
+	</tr>
+<% end %>
+
+</table>
+
+</br></br></br></br>
+
+<h2>Monthly Routines</h2>
+<table>
+	<thead>
+		<tr>
+			<th></th>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Frequency</th>
+		</tr>
+	</thead>
+<% @monthly_routines.each do |task| %>
+	<tr>
+		<td>
+		<% if RoutineTodo.where(:routine_id => task.id).order(:due_date)[0].completed == true %>
+			<%= button_to "complete", {controller: "routine_todos",
+      action: "update", routine_id: task.id, completed: "false" }, method: "put" %>
+		<% else %>
+			<%= button_to "not complete", {controller: "routine_todos",
+      action: "update", routine_id: task.id, completed: "true" }, method: "put" %>
+		<% end %>
+		</td>
+		<td><%= task.title %></td>
+		<td><%= task.description %></td>
+		<td><%= task.frequency %></td>
+		<td><%= button_to "delete", {:controller => :routines,
+      :action => 'destroy', :id => task.id }, :method => :delete %></td>
+	</tr>
+<% end %>
+
+</table>
+
+</br></br></br></br>
+
+<%= form_tag("/routine", method: "post") do %>
+  <%= label_tag(:title, "Title") %> 
+  <%= text_field_tag(:title) %></br>
+
+  <%= label_tag(:description, "Description") %>
+  <%= text_field_tag(:description) %></br>
+
+
+  <%= radio_button_tag(:frequency, "daily") %>
+  <%= label_tag(:frequency, "Daily") %>
+  
+  <%= radio_button_tag(:frequency, "weekly") %>
+  <%= label_tag(:frequency, "Weekly") %>
+  
+  <%= radio_button_tag(:frequency, "monthly") %>
+  <%= label_tag(:frequency, "Monthly") %> </br>
+
+  <%= submit_tag("submit") %>
+<% end %>
+

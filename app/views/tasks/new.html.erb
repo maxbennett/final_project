@@ -1,0 +1,16 @@
+<h2> Create </h2>
+<%= form_for @task do |f| %>
+<%= f.label :title, "Title" %>
+   <%= f.text_field  :title%> </br>
+
+   <%= f.label :completed, "Completed?" %>
+   <%= f.text_field  :completed%></br>
+
+   <%= f.label :due_date, "Due Date" %>
+   <%= f.text_field  :due_date%></br>
+
+   <%= f.label :priority, "Priority" %>
+   <%= f.text_field  :priority%></br>
+ 
+   <%= f.submit "create" %>  
+<% end %> 
