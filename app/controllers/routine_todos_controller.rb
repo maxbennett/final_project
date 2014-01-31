@@ -14,7 +14,7 @@ end
 
 def update
 	
-	routine_todo = RoutineTodo.where(:routine_id => params[:routine_id])[0]
+	routine_todo = RoutineTodo.find(params[:id])
 	
 	routine_todo.update_attributes(:completed => to_boolean(params[:completed])) if params[:completed] != nil
 

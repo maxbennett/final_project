@@ -1,0 +1,44 @@
+<table>
+	<thead>
+		<tr>
+			<th></th>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Frequency</th>
+			<th></th>
+		</tr>
+	</thead>
+	<% @routines[frequency.to_sym].each do |routine| %>
+	<tr>
+			<td>
+			<% if routine.recent_routine_todo.completed == true %>
+				<%= button_to "complete", {controller: "routine_todos",
+	      action: "update", id: routine.recent_routine_todo.id, completed: "false" }, method: "put" %>
+			<% else %>
+				<%= button_to "not complete", {controller: "routine_todos",
+	      action: "update", id: routine.recent_routine_todo.id, completed: "true" }, method: "put" %>
+			<% end %>
+
+			</td>
+
+			<td><%= routine.title %></td>
+			<td><%= routine.description %></td>
+			<td><%= routine.frequency %></td>
+			<td><%= button_to "delete", {:controller => :routines,
+	      :action => 'destroy', id: routine.id}, :method => :delete %></td>
+		</tr>
+		<tr>
+			<td>
+				  <%= form_for(routine.recent_routine_todo, url: "/routine_todo", method: :patch) do %>
+				  <%= label_tag(:text_requirement, "Text Requirement") %> 
+				  <%= text_field_tag :text_requirement, routine.recent_routine_todo.text_requirement %>
+				  <%= hidden_field_tag(:id, routine.recent_routine_todo.id) %>
+				  <%= submit_tag("save") %>
+				  <% end %>
+	  		</td>
+	  		<td><%= routine.recent_routine_todo.text_requirement%></td>
+			<td><%= routine.recent_routine_todo.due_date %></td>
+			<td><%= routine.recent_routine_todo.completed %></td>
+		</tr>
+	<% end %>
+</table>
