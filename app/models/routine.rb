@@ -1,6 +1,8 @@
 class Routine < ActiveRecord::Base
 
 	has_many :routine_todos
+	accepts_nested_attributes_for :routine_todos
+	
 
 	def self.routine_frequency
 		routines = {
@@ -14,4 +16,5 @@ class Routine < ActiveRecord::Base
 		recent_routine_todo = RoutineTodo.where(routine_id: self.id).order(:due_date).first
 		return recent_routine_todo
 	end
+	
 end

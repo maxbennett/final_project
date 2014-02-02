@@ -1,0 +1,63 @@
+<div class="modal fade" id="AddRoutine">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">New Routine</h4>
+      </div>
+      <div class="modal-body">
+        
+      <%= form_tag("/routine", method: "post") do %>
+        <div class="input-group">
+        <span class="input-group-addon">Title</span>
+          <%= text_field_tag(:title, "", {type: "text", class: "form-control", placeholder: ""}) %>
+        </div></br>
+
+        <div class="input-group">
+          <span class="input-group-addon">Description</span>
+          <%= text_field_tag(:description, "",{class: "form-control", placeholder: ""}) %>
+        </div>
+
+
+      <h3>Repeat</h3>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default">
+            <%= radio_button_tag(:frequency, "daily") %>Daily
+          </label>
+          <label class="btn btn-default">
+            <%= radio_button_tag(:frequency, "weekly") %>Weekly
+          </label>
+          <label class="btn btn-default">
+            <%= radio_button_tag(:frequency, "monthly") %>Monthly
+          </label>
+        </div>
+         
+
+      <h3>Requirements</h3>
+      <div class="input-group">
+        <span class="input-group-addon">
+          <%= check_box_tag(:text_requirements, checked=true) %>
+        Text
+        </span>
+          <%= number_field_tag(:min_words, "",{class: "form-control", placeholder: "Minimum Words..."}) %>
+      </div> </br>
+
+      <div class="input-group">
+        <span class="input-group-addon">
+          <input id="link_req_checkbox" type="checkbox">
+        Links
+        </span>
+          <%= number_field_tag(:link_requirements,"",{class: "form-control", placeholder: "How Many Links Required?"}) %>
+          </div>
+      </div></br>
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button name="button" class="btn btn-primary">Add Routine</button>
+        
+    <% end %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

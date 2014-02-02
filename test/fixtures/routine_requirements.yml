@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  input: MyString
+  type: 
+  routine_todo_id: 1
+
+two:
+  input: MyString
+  type: 
+  routine_todo_id: 1

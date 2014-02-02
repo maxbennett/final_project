@@ -3,9 +3,39 @@
 <head>
   <title>Callisto2App</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag  "boostrap", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag  "boostrap-theme", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag  "callisto", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "boostrap", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
+
+<script>
+$(document).ready(function(){
+	$("#min_words").prop("disabled", true)
+	$("#text_requirements").on("change", function(){
+			$("#min_words").prop("disabled", !$(this).prop("checked"))
+		})
+
+	$("#link_requirements").prop("disabled", true)
+	$("#link_req_checkbox").on("change", function(){
+			$("#link_requirements").prop("disabled", !$(this).prop("checked"))
+		})
+})	
+
+// $(document).ready(function(){
+// 	$("#main-submit").on("click", function(){
+// 		$(".small-submit").each(function(){
+// 			$(this).click()
+// 		})
+// 	})
+// })
+
+
+</script>
+
+
 <body>
 
 <%= yield %>

@@ -7,6 +7,8 @@ resource :routine
 
 resource :routine_todo
 
+resource :routine_requirement
+
 get '/home', to: "home#index"
 
 
